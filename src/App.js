@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
 
 function App() {
+  const [markdown, setMardown] = useState()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Wrapper>
+      <main>
+        <section className='markdown'>
+          <textarea className='input' value={markdown} onChange={(e) => setMardown(e.target.value)}></textarea>
+        </section>
+        <article className='result'>
+          <ReactMarkdown>{markdown}</ReactMarkdown>
+        </article>
+      </main>
+    </Wrapper>
+  )
 }
 
-export default App;
+const Wrapper = styled.main`
+  .markdown,
+  .result {
+    display: grid;
+    background: var(--clr-5);
+    margin-bottom: 1rem;
+    box-shadow: 1px 2px 4px 1px var(--clr-1);
+    width: 300px;
+    min-height: 400px;
+  }
+
+  .input {
+    padding: 1rem;
+  }
+
+  .result {
+    padding: 15px 10px;
+    background: var(--clr-5);
+  }
+`
+
+export default App
